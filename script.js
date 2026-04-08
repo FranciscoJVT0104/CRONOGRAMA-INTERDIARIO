@@ -429,12 +429,12 @@ function drawCourseOnCanvas(canvasToDraw, ctxToDraw, course) {
                 drawText = true;
             } else if (dateStr === fParcialStr) {
                 iconToDraw = loadedIcons['examen'];
-                actOriginal = "EXAM. PARCIAL";
+                actOriginal = "EXAM.\nPARCIAL";
                 drawText = true;
                 textYoffsetMultiplier = -0.05;
             } else if (dateStr === fFinalStr) {
                 iconToDraw = loadedIcons['examen'];
-                actOriginal = "EXAM. FINAL";
+                actOriginal = "EXAM.\nFINAL";
                 drawText = true;
                 textYoffsetMultiplier = -0.05;
             } else {
