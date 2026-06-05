@@ -380,14 +380,14 @@ function drawCourseOnCanvas(canvasToDraw, ctxToDraw, course) {
             
             const dayNum = currentDate.getDate();
             const matchingActivities = course.dias.filter(d => d.dia === dayNum);
+            const activityItem = matchingActivities.length > 0 ? matchingActivities[0] : null;
             let hasFeriado = false;
             let feriadoText = "FERIADO";
             
-            if (matchingActivities.length > 0) {
-                const item = matchingActivities[0];
-                if (item.actividad.toLowerCase().includes('feriado')) {
+            if (activityItem) {
+                if (activityItem.actividad.toLowerCase().includes('feriado')) {
                     hasFeriado = true;
-                    feriadoText = item.actividad;
+                    feriadoText = activityItem.actividad;
                 }
             }
             
@@ -442,6 +442,12 @@ function drawCourseOnCanvas(canvasToDraw, ctxToDraw, course) {
                     iconToDraw = loadedIcons['gps'];
                 } else if (currentWeekday === 2 || currentWeekday === 4) {
                     iconToDraw = loadedIcons['zoom'];
+                }
+
+                if (activityItem && iconToDraw) {
+                    actOriginal = activityItem.actividad;
+                    drawText = true;
+                    textYoffsetMultiplier = 0.05;
                 }
             }
             
@@ -566,7 +572,7 @@ document.getElementById('downloadAllBtn').addEventListener('click', () => {
     });
     
     zip.generateAsync({type:"blob"}).then(function(content) {
-        saveAs(content, "Cronogramas.zip");
+        saveAs(content, "Cronogramas-INTERDIARIO.zip");
         btn.textContent = originalText;
         btn.disabled = false;
     });
